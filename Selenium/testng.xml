@@ -4,7 +4,6 @@
   <test thread-count="5" name="Test">
     <classes>
       <class name="day1.RedBus"/>
-     <!--  <class name="day1.Login"/> -->
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
