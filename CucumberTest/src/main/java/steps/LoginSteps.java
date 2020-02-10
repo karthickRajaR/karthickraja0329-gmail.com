@@ -31,29 +31,61 @@ public class LoginSteps {
 	public void enter_the_UserName(String UserName) throws Throwable {
 		driver.findElement(By.xpath("//input[@id='UserName']")).sendKeys(UserName);
 	}
+	
+	@When("^Enter the UserName$")
+	public void enter_the_UserName() throws Throwable {
+		driver.findElement(By.xpath("//input[@id='UserName']")).sendKeys("karthik");
+	}
 
 	@When("^Enter the Password as (.*)$")
 	public void enter_the_Password(String PassWord) throws Throwable {
 		driver.findElement(By.id("Password")).sendKeys(PassWord);
 	}
+	
+	@When("^Enter the Password$")
+	public void enter_the_Password() throws Throwable {
+		driver.findElement(By.id("Password")).sendKeys("Chembian2");
+	}
 
 	@When("^Click on Login Button$")
-	public void click_on_Login_Button() throws Throwable {
+	public void click_on_Login_Button() throws InterruptedException  {
 		driver.findElement(By.xpath("//button[@type=\"button\"]")).click();
 		Thread.sleep(3000);
 	}
 
 	@Then("^Click on Quotes module$")
-	public void click_on_Quotes_module() throws Throwable {
+	public void click_on_Quotes_module() throws InterruptedException  {
 		driver.findElement(By.xpath("//a[@mattooltip='VPL Sites']")).click();
 		Thread.sleep(3000);
 	}
-
-	@Then("^Click on search button$")
-	public void click_on_search_button() throws Throwable {
+		@Then("^Click on VPL Sites$")
+		public void click_on_VPLSites_module() throws InterruptedException {
+			driver.findElement(By.xpath("//a[@mattooltip='VPL Sites']")).click();
+			Thread.sleep(3000);
+			
+	}
+	
+	@Then("^Enter the (.*) for site ID$")
+	
+	
+	
+	public void enter_the_value_for_site_ID(String value) throws InterruptedException  {
 		driver.switchTo().frame(0);
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("(//label[text()='Site ID']//following::input)[1]")).sendKeys(value);
+	   
+	}
+	@Then("^Click on search button$")
+	public void click_on_search_button() throws InterruptedException  {
+		
 		driver.findElement(By.xpath("//div[@class='row']//following::button[text()='Search']")).click();
-		driver.quit();
+		Thread.sleep(3000);
+	}
+	
+	@Then("^click on Edit button$")
+	public void click_on_Edit_VPL_Sites() throws InterruptedException {
+		driver.findElement(By.xpath("(//tr[@class='ng-scope']//following::img[@title='Click to View'])[1]")).click();
+		Thread.sleep(3000);
 	}
 
 }
