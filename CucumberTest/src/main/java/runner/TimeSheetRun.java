@@ -6,7 +6,11 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features="src/main/java/feature/TimeSheet.feature", 
                   glue="steps",
-                  monochrome=true)
+                  plugin ={"pretty","html:reports/test-report"},
+                  monochrome=true,
+//                  tags= {"@tag,@tag1,@tag2"},
+                  dryRun = false)
+                   
 
 public class TimeSheetRun extends AbstractTestNGCucumberTests{
 

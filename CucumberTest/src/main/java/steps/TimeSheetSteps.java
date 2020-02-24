@@ -2,6 +2,7 @@ package steps;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +10,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class TimeSheetSteps {
+	
 public static ChromeDriver driver;
 
 	@Given("^Open the Browser$")
@@ -25,13 +28,10 @@ public static ChromeDriver driver;
 	     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);  
 	    
 	}
-
-
 	
 	@Given("^Enter the Timesheet URL$")
 	public void enter_the_Timesheet_URL() throws Throwable {
 		driver.get("http://ibm-1:1212/CIS-United/(S(kdosmivvxg5ju3axmbfo4f45))/Home/Login.aspx");
-	    
 	}
 
 	@When("^Enter the Timesheet Username$")
@@ -48,8 +48,7 @@ public static ChromeDriver driver;
 
 	@Then("^Click on Timesheet Login$")
 	public void click_on_Timesheet_Login() throws Throwable {
-		driver.findElement(By.xpath("(//div[@id='loginbg']//following::input)[3]")).click();
-	    
+		 driver.findElement(By.xpath("(//div[@id='loginbg']//following::input)[3]")).click();  
 	}
 	
 	@Given("^Click on Timesheet$")
@@ -67,12 +66,13 @@ public static ChromeDriver driver;
 	@When("^Enter the Time IN$")
 	public void enter_the_Time_IN() throws Throwable {
 		   
-	    driver.findElement(By.xpath("(//input[@class='watermarked'])[1]")).sendKeys("9.20");
+	    driver.findElement(By.xpath("(//input[@class='watermarked'])[1]")).sendKeys("9.30");
 	}
 
 	@Then("^Click on TimeSheet Save button$")
-	public void click_on_TimeSheet_Save_button() throws Throwable {
-	   driver.findElement(By.xpath("(//td[@class='taR pTop5']//following::input)[16]")).click();
+	public void click_on_TimeSheet_Save_button() throws InterruptedException  {
+	   driver.findElement(By.xpath("(//td[@class='taR pTop5']//following::input[@class='button'])[5]")).click();
+	   Thread.sleep(3000);
 	    
 	}
 
@@ -88,65 +88,134 @@ public static ChromeDriver driver;
 	    driver.findElement(By.xpath("(//tr[@class='gridHeaderBG']//following::input)[1]")).click();
 	}
 
-	@When("^Select the project Name$")
-	public void select_the_project_Name() throws Throwable {
-	   WebElement projectList = driver.findElement(By.xpath("(//td[@class='taL']//select)[3]"));
-	   
-	   Select drop = new Select(projectList);
-	   drop.selectByVisibleText("Zion");
+	@When("^Select the project Name as (.*)$")
+	public void select_the_project_Name(String Project) throws Throwable {
+		
+			WebElement projectList = driver.findElement(By.xpath("(//td[@class='taL']//select)[3]"));
+			Select drop = new Select(projectList);
+			drop.selectByVisibleText(Project);
+		
 	    
 	}
 
-	@When("^Select the Task type$")
-	public void select_the_Task_type() throws Throwable {
-		WebElement TaskList = driver.findElement(By.xpath("(//td[@class='taL']//select)[4]"));
-		   
+	@When("^Select the Task type as (.*)$")
+	public void select_the_Task_type(String TaskType) throws Throwable {
+		
+		WebElement TaskList = driver.findElement(By.xpath("(//td[@class='taL']//select)[4]"));   
 		   Select drop = new Select(TaskList);
-		   drop.selectByVisibleText("Team Meeting");
-		    
-	    
+		   drop.selectByVisibleText(TaskType);
 	}
 
-	@When("^Select the Mode of Request$")
-	public void select_the_Mode_of_Request() throws Throwable {
-	   
+	@When("^Select the Mode of Request as (.*)$")
+	public void select_the_Mode_of_Request(String MOR) throws Throwable {
 		WebElement MoRList = driver.findElement(By.xpath("(//td[@class='taL']//select)[5]"));
-		   
 		   Select drop = new Select(MoRList);
-		   drop.selectByVisibleText("GTM");
-		    
+		   drop.selectByVisibleText(MOR);
+	  
 	    
 	}
 
-	@When("^Enter the Task Name$")
-	public void enter_the_Task_Name() throws Throwable {
-	   String scrum = "Scrum meeting for Views application and analysing the mail and TFS updates";  
+	@When("^Enter the Task Name as (.*)$")
+	public void enter_the_Task_Name(String Task) throws Throwable {
+	   //String scrum = "Scrum meeting for Views application and analysing the mail and TFS updates";  
 	   
-	    driver.findElement(By.xpath("(//input[@class='txtBox'])[3]")).sendKeys(scrum);
+	    driver.findElement(By.xpath("(//input[@class='txtBox'])[3]")).sendKeys(Task);
 	}
 
-	@When("^Enter the Start Time$")
-	public void enter_the_Start_Time() throws InterruptedException  {
+	@When("^Enter the Start Time as (.*)$")
+	public void enter_the_Start_Time(String Start) throws InterruptedException  {
 	   
-	    driver.findElement(By.xpath("(//input[@class='watermarked'])[3]")).sendKeys("9.30 am");
-	    Thread.sleep(3000);
+	    driver.findElement(By.xpath("(//input[@class='watermarked'])[3]")).sendKeys(Start);
+	    Thread.sleep(1000);
 	    
 	}
 
-	@When("^Enter the End Time$")
-	public void enter_the_End_Time() throws Throwable {
+	@When("^Enter the End Time as (.*)$")
+	public void enter_the_End_Time(String End) throws InterruptedException  {
 		
 		WebElement end =  driver.findElement(By.xpath("(//input[@class='watermarked'])[3]"));
 		end.sendKeys(Keys.TAB);
-		end.sendKeys("10.30 am");
-		
-	    
+		end.sendKeys(End);
+		Thread.sleep(2000);
 	}
 
 	@Then("^Click on Task Save button$")
 	public void click_on_Task_Save_button() throws Throwable {
 	   
-	    driver.findElement(By.xpath("//td[@class='taL']//input[@type='image'][1]")).click();
+		   driver.findElement(By.xpath("//input[@title='Insert']")).click();
 	}
 	
+	@Given("^Click on Add Task$")
+	public void click_on_Add_Task() throws Throwable {
+	 driver.findElement(By.xpath("//input[@value='Add Task']")).click();
+	}
+	
+	//Next Steps
+	
+
+@Given("^Click on leave Application$")
+public void click_on_leave_Application() throws Throwable {
+    driver.findElement(By.xpath("//a[text()='Leave Application']"));
+    
+}
+
+@When("^Select the Next project Name as (.*)$")
+public void select_the_Next_project_Name_as_ProjectName(String Project) throws Throwable {
+	WebElement projectList = driver.findElement(By.xpath("(//tr[@class='gridHeaderBG']//following::td//select)[3]"));
+	Select drop = new Select(projectList);
+	drop.selectByVisibleText(Project);
+    
+}
+
+@When("^Select the Next Task type as (.*)$")
+public void select_the_Next_Task_type_as_TaskType(String TaskType) throws Throwable {
+	WebElement TaskList = driver.findElement(By.xpath("(//table[contains(@id,'ProjectTask')]//td//select)[2]"));   
+	   Select drop = new Select(TaskList);
+	   drop.selectByVisibleText(TaskType);
+    
+}
+
+@When("^Select the Next Mode of Request as (.*)$")
+public void select_the_Next_Mode_of_Request_as_MOR(String MOR) throws Throwable {
+	try {
+	 WebElement MoRList = driver.findElement(By.xpath("(//table[contains(@id,'ProjectTask')]//td//select)[3]"));
+	   Select drop = new Select(MoRList);
+	   drop.selectByVisibleText(MOR);
+	}catch(Exception excep) {
+		System.out.println("MOR Not Printed");
+	}
+}
+
+@When("^Enter the Next Task Name as (.*)$")
+public void enter_the_Next_Task_Name_as_Task(String Task) throws Throwable {
+	driver.findElement(By.xpath("(//input[@class='txtBox'])[3]")).sendKeys(Task);
+    
+}
+
+@When("^Enter the Next Start Time as (.*)$")
+public void enter_the_Next_Start_Time_as_Start(String Start) throws Throwable {
+	driver.findElement(By.xpath("(//input[@class='watermarked'])[3]")).sendKeys(Start);
+    Thread.sleep(1000);
+    
+}
+
+@When("^Enter the Next End Time as (.*)$")
+public void enter_the_Next_End_Time_as_End(String End) throws Throwable {
+	WebElement end =  driver.findElement(By.xpath("(//input[@class='watermarked'])[3]"));
+	end.sendKeys(Keys.TAB);
+	end.sendKeys(End);
+	Thread.sleep(2000);
+    
+}
+
+@Then("^Click on Next Task Save button$")
+public void click_on_Next_Task_Save_button() throws Throwable {
+	driver.findElement(By.xpath("//input[@title='Insert']")).click();
+    
+}
+
+@Then("^Close the Broser$")
+public void close_the_Broser() throws Throwable {
+   driver.close();
+}
 }
