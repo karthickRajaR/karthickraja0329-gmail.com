@@ -18,7 +18,13 @@ Feature: Login Page
     And Click on search button
     And click on Edit button
     
+      
+    
      Examples:
      |value|
      |3|
      |4|
+     
+     Scenario: Close the browser
+     
+     Given Close the Browser

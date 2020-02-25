@@ -87,5 +87,9 @@ public class LoginSteps {
 		driver.findElement(By.xpath("(//tr[@class='ng-scope']//following::img[@title='Click to View'])[1]")).click();
 		Thread.sleep(3000);
 	}
+	@Given("^Close the Browser$")
+	public void close_the_Browser() throws Throwable {
+	    driver.close();
+	}
 
 }
