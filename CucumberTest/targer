@@ -1,0 +1,28 @@
+Feature: Login Page
+
+  Scenario: Login to the Application # src/main/java/feature/Run.feature:4
+    Given Open the browser           # LoginSteps.open_the_browser()
+    And Enter the URL                # LoginSteps.enter_the_URL()
+    When Enter the UserName          # LoginSteps.enter_the_UserName()
+    And Enter the Password           # LoginSteps.enter_the_Password()
+    And Click on Login Button        # LoginSteps.click_on_Login_Button()
+
+  Scenario Outline: Enter Project Site # src/main/java/feature/Run.feature:13
+    Then Click on Quotes module
+    And Enter the <value> for site ID
+    And Click on search button
+    And click on Edit button
+
+    Examples: 
+
+  Scenario Outline: Enter Project Site # src/main/java/feature/Run.feature:23
+    Then Click on Quotes module        # LoginSteps.click_on_Quotes_module()
+    And Enter the 3 for site ID        # LoginSteps.enter_the_value_for_site_ID(String)
+    And Click on search button         # LoginSteps.click_on_search_button()
+    And click on Edit button           # LoginSteps.click_on_Edit_VPL_Sites()
+
+  Scenario Outline: Enter Project Site # src/main/java/feature/Run.feature:24
+    Then Click on Quotes module        # LoginSteps.click_on_Quotes_module()
+    And Enter the 4 for site ID        # LoginSteps.enter_the_value_for_site_ID(String)
+    And Click on search button         # LoginSteps.click_on_search_button()
+    And click on Edit button           # LoginSteps.click_on_Edit_VPL_Sites()

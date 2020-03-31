@@ -9,29 +9,34 @@ Feature: Time Sheet
     Then Click on Timesheet Login
 
   @tag1
-  Scenario: Add In-Time TimeSheet
-    Given Click on Timesheet
+  Scenario Outline: Add In-Time TimeSheet
+    #Given Click on Timesheet
     #And Click on Add Button
-    #When Enter the Time IN
+    #When Enter the Time IN as <inTime>
     #Then Click on TimeSheet Save button
     #And Close the Pop-up
     #And Click on leave Application
-    #Given Click on Timesheet
+    Given Click on Timesheet
     And Click on Edit button
+    
+    Examples:
+    |inTime|
+    |9.22|
+    
 
-  #@tag2
-  #Scenario Outline: Add the Task
-    #When Select the project Name as <ProjectName>
-    #And Select the Task type as <TaskType>
-    #And Select the Mode of Request as <MOR>
-    #And Enter the Task Name as <Task>
-    #And Enter the Start Time as <Start>
-    #And Enter the End Time as <End>
-    #Then Click on Task Save button
-#
-    #Examples: 
-      #| ProjectName | TaskType     | MOR | Task                                                                      | Start | End   |
-      #| Zion        | Team Meeting | GTM | Team meeting for Views application and analysing the mail and TFS updates | 10.00 | 11.00 |
+  @tag2
+  Scenario Outline: Add the Task
+    When Select the project Name as <ProjectName>
+    And Select the Task type as <TaskType>
+    And Select the Mode of Request as <MOR>
+    And Enter the Task Name as <Task>
+    And Enter the Start Time as <Start>
+    And Enter the End Time as <End>
+    Then Click on Task Save button
+
+    Examples: 
+      | ProjectName | TaskType   | MOR    | Task                    | Start   | End     |
+      | Zion        | QA Testing | TFS No | Scrum meeting for Views application and analysing the mail and TFS updates, mom | 9.30 am | 11.30 pm |
 
   @tag3
   Scenario Outline: Add the Next Task
@@ -45,12 +50,9 @@ Feature: Time Sheet
     Then Click on Next Task Save button
 
     Examples: 
-      | ProjectName | TaskType   | MOR    | Task                                                                                 | Start    | End      |
-      | Zion        | QA Testing | TFS No | Data Management  - PBI  71229 - Test case prepared and Testing has been done in Data | 11.30 am | 01.00 pm |
-      | Zion        | QA Testing | TFS No | Regression Testing has been done for Test suite: MR2_Regression_20200221             | 2.00 pm  | 5.30 pm  |
-      | Zion        | QA Testing | TFS No | Bug ID 71307, 71306 Logged in TFS                                                    | 5.30 pm  | 6.15 pm  |
-
-      
-      Scenario:
-      
-      Then Close the Broser
+      | ProjectName | TaskType   | MOR    | Task                                                             | Start    | End      |
+      | Zion        | QA Testing | TFS No | Data Management  - PBI 71627 -Testing has been done in SIT & Prod for Test Suite : Data Management_PVT_20200310  | 02.00 am | 04.00 pm |
+      | Zion        | QA Testing | TFS No | Analysing v3.4.0                                 | 5.15 pm  | 7.00 pm  |
+      #| Zion        | QA Testing | TFS No | Bug ID 71337 has been created in TFS                                                                      | 11.00 am | 11.30 am |
+  #Scenario: 
+    #Then Close the Broser

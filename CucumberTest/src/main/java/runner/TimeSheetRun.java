@@ -8,7 +8,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
                   glue="steps",
                   plugin ={"pretty","html:reports/test-report"},
                   monochrome=true,
-//                  tags= {"@tag,@tag1,@tag2"},
+                  tags= {"@tag,@tag1,@tag2,@tag3"},
                   dryRun = false)
                    
 
